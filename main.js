@@ -9,7 +9,8 @@ const app = new Koa();
 const router = new Router();
 
 let state = {
-    url: null,
+    lastSMS: null,
+    url: 'http://bookmark.ericchu.net',
 };
 
 router.get('/', ctx => {
@@ -27,10 +28,14 @@ router.get('/redirect', ctx => {
     ctx.redirect(state.url);
 });
 
-router.post('/twilio', xmlParser(), ctx => {
-    console.log(ctx.request.body);
+router.post('/twilio', bodyParser(), ctx => {
+    const body = ctx.request.body;
+    state.lastSMS = body;
+    const url = body.Body;
+    state.url = url;
+
     const message = new twilio.twiml.MessagingResponse();
-    message.message('Url set to asdf');
+    message.message('Successfully changed bookmark');
     ctx.body = message.toString();
 });
 
