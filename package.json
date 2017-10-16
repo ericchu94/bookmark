@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "koa-xml-body": "^2.0.0",
+    "twilio": "^3.8.1"
+  }
+}
